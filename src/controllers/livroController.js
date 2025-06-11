@@ -11,7 +11,7 @@ class LivroController {
     }
 
     static async cadastrarLivro (req,res){
-        const novoLivro = req.body;
+        const novoLivro = req.body; //O body tem a referência do autor
         try{
             const autorEncontrado = await autor.findById(novoLivro.autor)
             const livroCompleto = {...novoLivro, autor: {...autorEncontrado._doc}}
@@ -50,6 +50,16 @@ class LivroController {
             res.status(200).json({ message: "Livro deletado"})
         }catch(erro){
             res.status(500).json({message: `${erro.message} - falha na exclusão do livro`})
+        }
+    }
+    
+    static async listarLivrosPorEditora (req, res){
+        const editora = req.query.editora; //Posso passar qualquer nome no lugar de "editora", como "query" ou "consulta"
+        try {
+            const livrosPorEditora = await livro.find({editora: editora})
+            res.status(200).json(livrosPorEditora)
+        } catch (erro) {
+          res.status(500).json({message: `${erro.message} - falha na busca`})  
         }
     }
     
