@@ -6,7 +6,7 @@ const routes = express.Router();
 
 routes.get("/autores", AutorController.listaAutores)
 routes.get("/autores/:id", AutorController.listaAutorPorId);
-routes.post('/autores', AutorController.cadastrarAutor);
+routes.post('/autores', AutorController.cadastrarAutores);
 routes.put("/autores/:id", AutorController.atualizarAutor)
 routes.delete("/autores/:id", AutorController.excluirAutorPorId);
 
